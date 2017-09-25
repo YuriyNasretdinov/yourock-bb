@@ -1,0 +1,25 @@
+php_flag magic_quotes_gpc off
+php_flag magic_quotes_runtime off
+php_flag register_globals off
+php_flag session.use_trans_sid off
+
+Options -Indexes
+
+#ipblock 
+
+#/ipblock
+
+
+# защита config.php от несанкционированного доступа
+
+<Files config.php>
+deny from all
+</Files>
+
+# очень простой и надёжный rewrite код
+
+RewriteEngine on
+RewriteBase /special/www/bb/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+) index.php

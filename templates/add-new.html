@@ -1,0 +1,108 @@
+<script src="js/add-new.js"></script>
+
+<h3>Размещение нового объявления / <a href="{CAT_HREF}">{CAT_NAME}</a> / <a href="{SCAT_HREF}">{SCAT_NAME}</a></h3>
+
+<form action="apply-add-new/" method="POST" enctype="multipart/form-data" onsubmit="return check_fields();">
+
+<? if(!empty($GLOBALS['ERRORS'])) {
+
+    echo '<div class="error"><h3>Ошибочка вышла!</h3>';
+    
+    echo '<div>Ошибка: {ERRORS}<br><br><i>Если Вы загружали иллюстрации,<br>их необходимо загрузить заново</i></div>';
+    
+    echo '</div>';
+
+} ?>
+
+<fieldset style="width: 600px;">
+    <legend style="font-size: 14px; font-style: italic; ">Заполните все поля, отмеченные (<span class="star">*</span>)</legend>
+        
+        <table class="bd_btm">
+        <tbody>
+            <tr>
+                <td>ФИО / Имя организации <span class="star">*</span></td>
+                <td><input name="fio" id="fio" /></td>
+            </tr>
+            
+            <tr>
+                <td>E-mail <small>(будет доступен публично!)</small> <span class="star">*</span></td>
+                <td><input name="email" id="email" /></td>
+            </tr>
+            
+            <tr>
+                <td>Контактный телефон</td>
+                <td><input name="phone" /></td>
+            </tr>
+            
+            <tr>
+                <td>ICQ</td>
+                <td><input name="icq" /></td>
+            </tr>
+            
+            <tr>
+                <td>Веб-сайт</td>
+                <td><input name="url" /></td>
+            </tr>
+            
+            <tr>
+                <td>Город <span class="star">*</span></td>
+                <td>{CITIES_SELECT}</td>
+            </tr>
+            
+            <tr>
+                <td>Раздел <span class="star">*</span></td>
+                <td>{CATEGORY_SELECT}</td>
+            </tr>
+            
+            <tr>
+                <td>Заголовок объявления <span class="star">*</span></td>
+                <td><input name="header" id="header" /></td>
+            </tr>
+            
+            <tr>
+                <td><big>Краткое описание</big><br><small>не более 200 символов<br><br>(поле не является обязательным;<br>если вы заполните это поле, вы повысите информативность вашего объявления для посетителей сайта)</small></td>
+                
+                <td><textarea name="body_short" cols="40" rows="10"></textarea></td>
+            </tr>
+            
+            <tr>
+                <td><big>Текст объявления <span class="star">*</span></big><br><small><br>Старайтесь использовать знаки препинания, писать законченные предложения.<br><br>Максимально чётко и ясно формулируйте, что Вы <nobr>продаёте/ищете/покупаете</nobr>.<br><br>Воздержитесь от использования CAPS LOCK, а также сленга и/или нецензурных выражений.</small></td>
+                
+                <td><textarea name="body" id="body" cols="40" rows="20"></textarea></td>
+            </tr>
+            
+            <tr>
+                <td><big>Основная иллюстрация</big><br><small>не более <?echo $GLOBALS['MAX_IMG_WIDTH'];?>x<?echo $GLOBALS['MAX_IMG_HEIGHT'];?> пикселей<br><br>(основная иллюстрация показывается в списке объявлений; она будет автоматически уменьшена, если превышает указанные размеры)</small></td>
+                
+                <td><input type="file" name="main_img" /></td>
+            </tr>
+            
+            <tr>
+                <td><big>Дополнительные иллюстрации</big><br><small>не более 500 Кб на картинку<br><br>(иллюстрации будут показаны на странице с текстом объявления)</small></td>
+                
+                <td>
+                    <input type="file" name="add_img1" /><br>
+                    <input type="file" name="add_img2" /><br>
+                    <input type="file" name="add_img3" />
+                </td>
+            </tr>
+            
+            <tr>
+                <td><big>Введите защитный код с картинки <span class="star">*</span></big><br><br>
+                    <script>
+                        document.write('(<a onclick="document.getElementById(\'captcha_img\').src = \'captcha-img/\' + Math.random(); return false;" href="">показать другую картинку</a>)');
+                        
+                        document.body.onback = function(){ document.getElementById('captcha_img').src = 'captcha-img/' + Math.random(); } // запрет кэширования каптчи в случае обновления страницы
+                    </script></td>
+                
+                <td><noindex><img src="captcha-img/" id="captcha_img"></noindex><br><input name="captcha_keystring" id="captcha_keystring" />
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        
+        <input type="submit" value="разместить" style="width: auto; font-size: 18px; margin-top: 10px;">
+    
+</fieldset>
+
+</form>

@@ -1,0 +1,103 @@
+body, td, div { font-family: sans-serif; font-size: 18px; }
+small { font-size: 14px; color: gray; }
+big { font-size: 21px; }
+
+a, a:link, a:active, a:visited, a:visited:active {color: #006699;}
+a:hover {text-decoration: underline; color: #dd6900;}
+
+h3 { margin-top: 0px; padding-top: 0px; }
+
+body
+{
+    background: #e5e5e5;
+    margin: 0px;
+    padding: 0px;
+}
+
+.navigation
+{
+    padding: 10px;
+    
+    border-right: 2px black dotted;
+    
+    font-size: 18px;
+}
+
+.header
+{
+    font-weight: bold;
+    
+    border-bottom: 2px gray solid;
+}
+
+.edit_field
+{
+    border-bottom: 1px gray solid;
+}
+
+.warn
+{
+    font-weight: bold;
+    color: red;
+}
+
+.cont
+{
+    padding: 10px;
+}
+
+button
+{
+    font-size: 13px;
+}
+
+input
+{
+    width: 100%;
+}
+
+.attention
+{
+    padding-bottom: 10px;
+    font-style: italic;
+}
+
+a.header
+{
+    font-size: 18px;
+    font-weight: bold;
+    border: 0px;
+}
+
+.actions
+{
+    font-size: 16px;
+    
+    margin-right: 10px;
+}
+
+.actions a, .actions span
+{
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.actions span
+{
+    visibility: hidden;
+}
+
+.actions a.del
+{
+    color: red;
+}
+
+.actions a.new_scat, .actions a.add
+{
+    color: green;
+}
+
+.actions a.edit
+{
+    color: #720073;
+}

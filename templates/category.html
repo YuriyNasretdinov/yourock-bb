@@ -1,0 +1,52 @@
+<!-- порядок следования блоков важен -->
+
+<!-- {/} и {SCAT_NAME} появляются только в случае, если человек находится в подкатегории -->
+
+<h1><a href="">Главная страница</a> / <a href="{CAT_HREF}">{CAT_NAME}</a> {/} {SCAT_NAME}</h1>
+    
+    <!-- блок, который появляется только в случае, если человек находится в большой категории (не в подкатегории): -->
+    
+    <!--parts-separator-->
+    
+        <table cellspacing=10 cellpadding=4 style="border: 1px black solid;">
+            <tr>
+                <td>{PARTS}</td>
+            </tr>
+        </table>
+        
+        <!--parts-separator-->
+        
+        <div><li><a href="{HREF}" title="{DESCRIPTION}">{NAME}</a></div>
+    
+    <!--parts-separator-->
+    
+    <!--/ блок, который появляется только в случае, если человек находится в большой категории (не в подкатегории): -->
+
+<h2>Объявления:</h2>
+
+<div style="margin-bottom: 15px;">страницы: {PAGES}</div>
+
+<table>
+{ADS}
+</table>
+
+<div style="margin-top: 15px;">страницы: {PAGES}</div>
+
+<!--parts-separator-->
+
+    <!-- ADS -->
+    
+    <tr>
+        <td style="border: gray 1px solid;"><img src="{IMG_SRC}"></td>
+        <td style="border: gray 1px solid;">
+                <h3><a href="{HREF}">{HEADER} <small>({DATE})</small></a></h3>
+            
+                <p>{BODY_SHORT}</p>
+            
+            
+            <div style="margin-top: 5px; font-style: italic;"><a href="">Главная страница</a> / <a href="{CAT_HREF}">{CAT_NAME}</a> / <a href="{SCAT_HREF}">{SCAT_NAME}</a></div>
+            
+        </td>
+    </tr>
+    
+    <!-- /ADS -->

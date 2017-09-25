@@ -1,0 +1,107 @@
+<html>
+<head>
+    <title>Доска объявлений {NAV_TITLE}
+    
+    <?
+    if($GLOBALS['CITY'])
+    {
+        $GLOBALS['CITY_NAME'] = get_city_name_by_id($GLOBALS['CITY']);
+        echo ' ('.$GLOBALS['CITY_NAME'].')';
+    }else
+    {
+        echo ' (все города)';
+    }
+    ?>
+    
+    </title>
+    <!-- BASE HREF гарантирует, что все ссылки будут идти от корня скрипта (может пригодиться, если скрипт хранится в директории) -->
+    <base href="<?echo get_base_href();?>" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    
+    <style>
+    
+    body { background: #e5e5e5; }
+    
+    a, a:link, a:active, a:visited, a:visited:active {color: #006699;}
+    a:hover {text-decoration: underline; color: #dd6900;}
+    
+    body, td, div { font-family: sans-serif; font-size: 18px; }
+    small { font-size: 14px; color: gray; }
+    big { font-size: 21px; }
+    
+    .star { color: red; }
+    
+    table.bd_btm tbody tr td { border-bottom: 1px gray solid; margin: 5px; padding: 3px 0px 3px 0px; }
+    
+    input { width: 100%; }
+    
+    .menu { margin-bottom: 15px; }
+    
+    .city_select { position: absolute; font-size: 14px; color: gray; text-align: left; }
+    
+    div.search { position: absolute; right: 1px; top: 0px; font-size: 14px; }
+    
+    input.search { width: 100px; }
+    input.start_search { width: auto; }
+    
+    .noborder { margin: 3px; padding: 0px; }
+    
+    .error { color: red; font-size: 14px; margin: 10px; }
+    
+    </style>
+</head>
+
+<body>
+    
+    <div align="center">
+    
+    <div class="city_select">
+        Показываются объявления<br>
+        <? if($GLOBALS['CITY']) { echo 'для города '.$GLOBALS['CITY_NAME']; }
+           else { echo 'для всех городов'; }
+        ?>
+    
+        (<a href="change-city/" rel="nofollow">поменять</a>)
+    </div>
+    
+    <div class="menu">
+        <a href="">Главная страница</a> / <a href="add-new/">Разместить объявление</a> <? if(!empty($GLOBALS['SCAT_ID'])) echo '(<a href="add-new/{SCAT_ID}" title="Разместить объявление в текущем разделе">в этом разделе</a>)'; ?>
+        
+        <br>
+        
+        <small>
+        (всего
+        
+        <? echo declension(get_total_ads(), 'объявление объявления объявлений');
+           if($GLOBALS['CITY']) echo ', из них '.get_total_ads_for_city($GLOBALS['CITY']).' в выбранном городе';
+        ?>)
+        </small>
+    </div>
+    
+    <div class="search"><form name="web" method="get" action="http://yandex.ru/sitesearch" class="noborder">
+            <b title="Поиск по сайту с помощью Яндекса">Поиск:</b>
+            <input type="text" name="text" size="40" value="" maxlength="160" class="search" />
+            <input type="submit" value="Искать" class="start_search" />
+    
+            <input type="hidden" name="clid" value="39177" />
+            <input type="hidden" name="site" value="<?
+                echo 'http://'.$_SERVER['HTTP_HOST'].$GLOBALS['CUR_DIR'];
+            ?>" />
+            <input type="hidden" name="server_name" value="Супер-доска" />
+
+            <input type="hidden" name="referrer1" value="<?
+                echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+            ?>" />
+            <input type="hidden" name="referrer2" value="Супер-доска" />
+        </form>
+    </div>
+    
+    <div><a href=""><img src="i/logo.png" border="0" width="250" height="75" /></a></div>
+
+    {CONTENT}
+    
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,151 @@
+<div style="margin: 10px;">
+    
+    <h1 style="margin: 3px;"><a href="{CAT_HREF}">{CAT_NAME}</a></h1>
+    
+    {RUBRICATOR_YN}
+</div>
+
+<table>
+
+    <tr>
+        <td style="border: gray 1px solid; padding: 10px;" valign="top">
+            <b>{FIO}</b>
+            <br><small>{CITY}, {REGION}</small><br><br>
+            
+            <?
+            $r = $GLOBALS['res'];
+            
+            if(!empty($r['phone'])) echo '<b>Телефон:</b> {PHONE}<br><br>';
+            if(!empty($r['icq'])) echo '<b>ICQ:</b> {ICQ}<br><br>';
+            if(!empty($r['url'])) echo '<b>Сайт:</b> <a href="{URL}">{URL}</a><br><br>';
+            ?>
+            
+            <b>E-mail:</b> <a href="{CONTACT_HREF}">{E-MAIL}</a>
+            
+            <br><br><img src="{IMG_SRC}" />
+            
+        </td>
+        <td style="border: gray 1px solid; padding: 10px;" valign="top">
+                <h3>{HEADER} <small>({DATE})</small></h3>
+            
+                <p>{BODY}</p>
+            
+            
+            <div style="margin-top: 5px; font-style: italic;"><a href="">Главная страница</a> / <a href="{CAT_HREF}">{CAT_NAME}</a> / <a href="{SCAT_HREF}">{SCAT_NAME}</a></div>
+            
+        </td>
+    </tr>
+    
+    <?
+    
+    $res = $GLOBALS['res']; // result
+    $IMG_ROOT = $GLOBALS['UPL_IMG_ROOT'];
+    
+    if($res['add_img1'] || $res['add_img2'] || $res['add_img3'])
+    {
+        echo '<tr>
+        <td colspan="2" style="border: gray 1px solid;"><div align="center"><h2 style="margin-bottom: 3px;">Дополнительные иллюстрации:</h2>(если вокруг изображения есть рамка, нажмите на неё, чтобы увидеть полную версию изображения)<br><br>';
+        
+        for($i = 1; $i <= 3; $i++)
+        {
+            if(empty($res['add_img'.$i])) continue;
+            
+            $tmp = explode(';', $res['add_img'.$i]);
+            
+            if(empty($tmp[1])) // небольшая картинка, без увеличенной версии
+            {
+                echo '<img src="'.$IMG_ROOT.'/'.$tmp[0].'"> ';
+            }else
+            {
+                list($small, $big) = $tmp;
+                
+                echo '<a href="'.$IMG_ROOT.'/'.$big.'" target="_blank"><img src="'.$IMG_ROOT.'/'.$small.'"></a> ';
+            }
+        }
+        
+        echo '</div></td>
+        </tr>';
+    }
+    
+    ?>
+
+</table>
+    
+    
+    
+    <?
+    
+    $show_next_or_prev = $GLOBALS['res_prev'] || $GLOBALS['res_next'];
+    
+    if($show_next_or_prev) echo '<table cellpadding="10" style="margin-top: 10px;"><tr>';
+    
+    if($GLOBALS['res_prev']) echo '<td><div align="left"><b>&larr; Предыдущее объявление</b></div>{PREV_AD}</td>';
+    if($GLOBALS['res_next']) echo '<td><div align="right"><b>Следующее объявление &rarr;</b></div>{NEXT_AD}</td>';
+    
+    if($show_next_or_prev) echo '</tr></table>';
+    
+    ?>
+    
+    <h2>Последние объявления в этой категории:</h2>
+
+<table>
+{ADS}
+</table>
+
+    <!-- RUBRICATOR_YN -->
+    
+        <!--parts-separator-->
+        
+            <table cellspacing=10 cellpadding=4 style="border: 1px black solid;">
+                <tr>
+                    <td>{PARTS}</td>
+                </tr>
+            </table>
+            
+            <!--parts-separator-->
+            
+            <div><li><a href="{HREF}" title="{DESCRIPTION}">{NAME}</a></div>
+    
+    <!--/ RUBRICATOR_YN -->
+    
+<!--parts-separator-->
+
+    <!-- ADS -->
+    
+    <tr>
+        <td style="border: gray 1px solid;"><img src="{IMG_SRC}"></td>
+        <td style="border: gray 1px solid;">
+                <h3><a href="{HREF}">{HEADER} <small>({DATE})</small></a></h3>
+            
+                <p>{BODY_SHORT}</p>
+            
+            
+            <div style="margin-top: 5px; font-style: italic;"><a href="">Главная страница</a> / <a href="{CAT_HREF}">{CAT_NAME}</a> / <a href="{SCAT_HREF}">{SCAT_NAME}</a></div>
+            
+        </td>
+    </tr>
+    
+    <!-- /ADS -->
+
+<!--parts-separator-->
+
+    <!-- PREV_AD / NEXT_AD -->
+    
+    <table width="400">
+    
+    <tr>
+        <td style="border: gray 1px solid;"><img src="{IMG_SRC}" width="{IMG_WIDTH}" height="{IMG_HEIGHT}"></td>
+        <td style="border: gray 1px solid;">
+                <h3><a href="{HREF}" style="font-size: 14px;">{HEADER} ({DATE})</a></h3>
+            
+                <p><small>{BODY_SHORT}</small></p>
+            
+            
+            <!-- <div style="margin-top: 5px; font-style: italic;"><a href="">Главная страница</a> / <a href="{CAT_HREF}">{CAT_NAME}</a> / <a href="{SCAT_HREF}">{SCAT_NAME}</a></div> -->
+            
+        </td>
+    </tr>
+    
+    </table>
+    
+    <!-- / PREV_AD / NEXT_AD -->
